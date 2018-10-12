@@ -2,6 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from .forms import RegistrationForm
+from .models import Profile,Image
 
 # Create your views here.
 def home(request):
@@ -18,3 +19,15 @@ def register(request):
     else:
         form=RegistrationForm()
         return render(request, 'registration/registration_form.html', {'form':form})
+
+
+
+def profile(request, username):
+    profile = User.objects.get(username=username)
+    # try:
+    profile_info = Profile.get_profile(profile.id)
+    # # except:
+    # profile_info = Profile.filter_by_id(profile.id)
+    images = Image.get_profile_image(profile.id)
+    title = f'@{profile.username}'
+    return render(request, 'profile/profile.html', {'title':title, 'profile':profile, 'profile_info':profile_info, 'images':images})  

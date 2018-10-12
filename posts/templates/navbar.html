@@ -18,7 +18,7 @@
                 </a>
             </li>
             <li class="nav-item" style="margin-top:-10px;">
-                <a class="nav-link open-nav" href="#" style="font-size:30px;"><i class="fa fa-user"> {{user}}</i></a>
+                <a class="nav-link open-nav"href="{% url 'profile' username=user %}" style="font-size:30px;"><i class="fa fa-user"> {{user}}</i></a>
             </li>
             {% else %}
             <li>

@@ -5,6 +5,7 @@ from django.conf.urls.static import static
 
 urlpatterns=[
     url(r'^$', views.home, name='home'),
+    url(r'^user/(?P<username>\w+)', views.profile, name='profile'),
 ]
 
 if settings.DEBUG:
