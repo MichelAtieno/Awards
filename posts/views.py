@@ -5,9 +5,11 @@ from django.contrib.auth.decorators import login_required
 from .forms import RegistrationForm, ProjectForm
 from .models import Profile,Project
 # Create your views here.
-def home(request):
-    return render(request, 'home.html')
 
+def home(request):
+    images = Project.get_images()
+    return render(request, 'home.html', {'images':images})
+    
 def register(request):
     if request.method == 'POST':
             form = RegistrationForm(request.POST)
