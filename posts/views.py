@@ -1,9 +1,9 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
-from .forms import RegistrationForm
+from django.contrib.auth.decorators import login_required
+from .forms import RegistrationForm, ProjectForm
 from .models import Profile,Project
-
 # Create your views here.
 def home(request):
     return render(request, 'home.html')
@@ -31,3 +31,17 @@ def profile(request, username):
     projects = Project.get_profile_image(profile.id)
     title = f'@{profile.username}'
     return render(request, 'profile/profile.html', {'title':title, 'profile':profile, 'profile_info':profile_info, 'projects':projects})  
+
+@login_required(login_url='/accounts/login')
+def project(request):
+    if request.method == 'POST':
+        form = ProjectForm(request.POST, request.FILES)
+        if form.is_valid():
+            upload = form.save(commit=False)
+            upload.user_profile = request.user
+            upload.save()
+            return redirect('profile', username=request.user)
+    else:
+        form = ProjectForm()
+
+    return render(request, 'profile/uploadproject.html', {'form':form})

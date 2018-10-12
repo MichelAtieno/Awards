@@ -25,18 +25,12 @@
                     {% endif %}
                     <br>
                     <br>
-                    {{images|length}} Posts
-                    <br>
-                    <br>
-                    0 Followers
-                
-                    0 Following
-                    <br>
-                    <br>
+                    {{projects|length}} Posts
+                   
                     <p class="font3">BIO: {{profile_info.bio}}</p>
             
                     {% if profile.username == user.username %}
-                    <p><a href="">Add Image</a></p>
+                    <p><a href="{% url 'upload_project'%}">Add Project</a></p>
                     {% endif %}
                 </div>   
 
@@ -53,16 +47,16 @@
     <hr>
     <div class="container">
         <div class="row">
-            {% for img in images %}
+            {% for proj in projects %}
             <div class="col-md-4">
-                <img src="{{img.photo.url}}" alt="Image" style="height:400px;width:400px;border-radius:20px;" class="img-responsive">
+                <img src="{{proj.photo.url}}" alt="Image" style="height:400px;width:400px;border-radius:20px;" class="img-responsive">
                 <h3>
-                    <a data-toggle="modal" data-target="#{{one_image.id}}" style="font-size:40px; color: rgb(62, 235, 235);;text-transform: capitalize; text-align:center; text-decoration: underline; font-family:'Segoe UI';">{{one_image.name}}</a>
+                    <a data-toggle="modal" data-target="#" style="font-size:40px; color: rgb(62, 235, 235);;text-transform: capitalize; text-align:center; text-decoration: underline; font-family:'Segoe UI';">{{one_image.name}}</a>
                 </h3>
             </div>
             {% empty %}
             <div class="col-md-12">
-                <h2>Profile has no images</h2>
+                <h2>Profile has no projects</h2>
             </div>
             {% endfor %}
         </div>
