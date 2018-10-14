@@ -93,7 +93,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'awards.wsgi.application'
-
+LOGIN_REDIRECT_URL = '/'
 
 
 
