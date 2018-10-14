@@ -2,11 +2,13 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models import Avg
 from tinymce.models import HTMLField
+import numpy as np
 
 # Create your models here.
 class Profile(models.Model):
     profile_photo = models.ImageField(upload_to ='prof_pictures/')
     bio = HTMLField()
+    phone = models.IntegerField(default=0) 
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
 
     def save_profile(self):

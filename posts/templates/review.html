@@ -4,12 +4,14 @@
 {% load bootstrap3 %}
 
   <title>Reviews</title>
-  {{form.media}}
+ 
   <p class="home-text">
     <a href="{% url 'profile' username=project.user_profile.username %}">{{project.user_profile.username}}</a>
 </p> 
 <img src="{{project.photo.url}}" alt="Image" class="img-responsive" style="height:400px;width:400px;border-radius:20px;">
 <p>{{image.project_caption}} </p>
+
+</div>
 
 <hr>
 <div>
@@ -23,10 +25,12 @@
                     <a href="{% url 'profile' username=review.user.username %}">{{review.user.username}}</a>
                 </li>
                 <li class="list-inline-item">
-                    <p>COMMENT: {{review.comment}}</p>
+                    <p>{{review.comment}} [usability: {{review.usability}}, content: {{review.content}} , design: {{review.design}}]</p>
+                    <p>{{ project.average_score | floatformat }}</p>
+                    <!-- <p>COMMENT: {{review.comment}}</p>
                     <p>DESIGN: {{review.design}} </p>
                     <p>USABILTY: {{review.usability}} </p>
-                    <p>CONTENT: {{review.content}} </p>
+                    <p>CONTENT: {{review.content}} </p> -->
                 </li>
                 {% endif %}
             </ul>
@@ -41,7 +45,7 @@
     {% endfor %}
 
 
-
+{{form.media}}
 <div class="card mx-auto" style="max-width:50rem; margin-top:50px;">
     <form action="{% url 'project_review' project_id=project.id %}" method="POST">
         {% csrf_token %}

@@ -17,7 +17,7 @@
                 
                 <div class="col-md-5" style="font-size: 18px;">
                     {% if profile.username == user.username %}
-                    <a href="">Edit Profile</a>
+                    <a href="{% url 'edit_profile' %}">Edit Profile</a>
                     <a data-toggle="modal" data-target="#settings"><i class="fa fa-cog fa-2x"></i></a>
                     {% else %}
                     <a href="#" class="btn btn-primary">Follow</a>
@@ -28,6 +28,7 @@
                     {{projects|length}} Posts
                    
                     <p class="font3">BIO: {{profile_info.bio}}</p>
+                    <p>CONTACT: {{profile_info.phone}}</p>
             
                     {% if profile.username == user.username %}
                     <p><a href="{% url 'upload_project'%}">Add Project</a></p>
@@ -53,6 +54,7 @@
                 <h3>
                     <a data-toggle="modal" data-target="#" style="font-size:40px; color: rgb(62, 235, 235);;text-transform: capitalize; text-align:center; text-decoration: underline; font-family:'Segoe UI';">{{proj.name}}</a>
                 </h3>
+               
             </div>
             {% empty %}
             <div class="col-md-12">

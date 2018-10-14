@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect,get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from .forms import RegistrationForm, ProjectForm, ReviewForm
+from .forms import RegistrationForm, ProjectForm, ReviewForm, ProfileForm
 from .models import Profile,Project,Reviews
 # Create your views here.
 
@@ -73,6 +73,22 @@ def project_review(request, project_id):
     else:
         form = ReviewForm()
         return render(request,'review.html',{'project':project ,'form':form, 'reviews':reviews})
+
+@login_required(login_url='/accounts/login')
+def edit_profile(request):
+   
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, request.FILES)
+        if form.is_valid():
+            edit = form.save(commit=False)
+            edit.user = request.user
+            edit.save()
+            return redirect('profile', username=request.user)
+            
+    else:
+        form = ProfileForm()
+
+    return render(request, 'profile/editprofile.html', {'form':form, 'profile':profile})
 
 
 

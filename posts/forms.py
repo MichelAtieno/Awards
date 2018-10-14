@@ -20,3 +20,8 @@ class ReviewForm(forms.ModelForm):
     class Meta:
         model = Reviews
         exclude = ['user','project','user_rating']
+
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        exclude = ['user']
