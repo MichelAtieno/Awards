@@ -1,19 +1,26 @@
 <nav class="navbar navbar-inverse">
         <div class="container-fluid">
-          <div class="navbar-header">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation" style="background-color:black;">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <a class="navbar-brand" href="#">MENU</a>
-            <a><span class="glyphicon glyphicon-search"></span></a>
-          </div>
+         
 
-          <a class="navbar-brand" href="/">AWARDS</a>
-          <form class="form-inline my-2 my-lg-0" role="search" action="{% url 'search' %}">
-              <input class="form-control my-2 my-sm-0 search-input" name="search" type="search" placeholder="Search Users" aria-label="Search" style="font-size:20px;">
-          </form>
+          
+          <ul class="nav navbar-nav navbar-left">
+            <li>
+                <a class="navbar-brand" href="/">AWARDS</a>
+            </li>
+            <li>
+                <form class="form-inline my-2 my-lg-0" role="search" action="{% url 'search' %}" style="margin-top:5px;">
+                    <input class="form-control my-2 my-sm-0 search-input" name="search" type="search" placeholder="Search Users" aria-label="Search" style="font-size:20px;">
+                    <span class="glyphicon glyphicon-search"></span>
+                </form>
+
+            </li>
+              
+
+          </ul>
+         
 
           <ul class="nav navbar-nav navbar-right">
+            
             {% if user.is_authenticated %}
             <li>
                 <a class="nav-link"href="/logout" style="font-size:25px;">

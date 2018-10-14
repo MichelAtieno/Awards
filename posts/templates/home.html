@@ -4,127 +4,65 @@
 {% block content%}
 <head>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <style>
-        .stars-outer {
-            position: relative;
-            display: inline-block;
-        }
-        .stars-inner {
-            position:absolute;
-            top:0;
-            left:0;
-            white-space:nowrap;
-            overflow:hidden;
-            width:0;
-        }
-        .stars-outer::before {
-            content:"\f005 \f005 \f005 \f005 \f005 \f005 \f005 \f005 \f005 \f005";
-            font-family:"Font Awesome 5 Free";
-            font-size: 23px;
-            font-weight: 900;
-            color: #ccc;
-        }
-        .stars-inner::before {
-            content:"\f005 \f005 \f005 \f005 \f005 \f005 \f005 \f005 \f005 \f005";
-            font-family:"Font Awesome 5 Free";
-            font-size: 23px;
-            font-weight: 900;
-            color: #f8ce0b;
-        }
-    </style>
+   
 
 </head>
-<body style="font-size:23px;">
-    <div class="container-fluid">
-        <div class="jumbotron">
+<body>
+    <div class="container-fluid" style="background-color: gainsboro;">
+        <div class="jumbotron" style="background-image: url('static/back2.jpg'); background-size:cover;">
             
-            <p class="text-center">The awards for design,creativity and innovation on the internet</p>
+            <p class="text-center" style="font-weight:bolder;font-style: italic;font-size:27px;">The awards for design,creativity and innovation for designers</p>
             <div style="float:right;">
                     <a href="#" target="_blank" class="col dark-gray width-120">
-                            <i class="fab fa-facebook" style="font-size:23px;"></i>
+                            <i class="fab fa-facebook" style="font-size:23px;margin-left:10px;"></i>
                     </a>
                     
                     <a href="#" target="_blank" class="col dark-gray width-120">
-                            <i class="fab fa-twitter" style="font-size:23px;"></i>
+                            <i class="fab fa-twitter" style="font-size:23px;margin-left:15px;"></i>
                     </a>
                     
                     <a href="#" target="_blank" class="col dark-gray width-120">
-                            <i class="fab fa-instagram" style="font-size:23px;"></i>
+                            <i class="fab fa-instagram" style="font-size:23px;margin-left:15px;"></i>
                     </a>
 
             </div>
-                <div class="jumbotron">
-                    <div class="form-group">
-                        <select id="option-select" class="form-control custom-select">
-                            <option value="0" disabled selected>Select Option</option>
-                            <option value="design">DESIGN</option>
-                            <option value="usability">USABILITY</option>
-                            <option value="content">CONTENT</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <input type="number" id="rating-control" class="form-control" step="1" max="10" placeholder="Rate 1-10" disabled>
-                    </div>
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>PROJECT RATINGS</th>
-                                <th>Total Ratings</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="design">
-                                <td>DESIGN</td>
-                                <td>
-                                    <div class="stars-outer">
-                                        <div class="stars-inner"></div>
-                                    </div>
-                                    <span class="number-rating"></span>
-                                </td>
-                            </tr>
-                            <tr class="usability">
-                                <td>USABILITY</td>
-                                <td>
-                                    <div class="stars-outer">
-                                        <div class="stars-inner"></div>
-                                    </div>
-                                    <span class="number-rating"></span>
-                                </td>
-                            </tr>
-                            <tr class="content">
-                                <td>CONTENT</td>
-                                <td>
-                                    <div class="stars-outer">
-                                        <div class="stars-inner"></div>
-                                    </div>
-                                    <span class="number-rating"></span>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-
-                </div>
-
+            <h1 class="text-center" style="font-weight:bolder;font-style: italic; text-decoration: underline;" >PROJECTS</h1>
+                
             </div>
-            <div class="container">
-            <div class="row" style="display: flex; flex-direction: row;">
+            <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-4" style="flex-direction:row;">
                 {% for img in images%}
-                <div class="col-md-4">
-                        <a href="{% url 'profile' username=img.user_profile.username %}" style="font-weight:bolder;">{{img.user_profile.username}}</a>
-                        <img src="{{img.photo.url}}" alt="Card image cap" class="img-responsive" style="height:400px;width:400px;border-radius:20px;">
-                        <p style="font-weight:bolder;">
-                                {% autoescape on %}
+                
+                    <div class="card" style="width: 18rem;border:hidden;" data-toggle="modal" data-target="#{{img.id}}">
+                            <a href="{% url 'profile' username=img.user_profile.username %}" style="font-weight:bolder;">{{img.user_profile.username}}</a>
+                            <img class="card-img-top" src="{{img.photo.url}}" alt="Card image cap" class="img-responsive" style="height:400px;width:400px;border-radius:20px;">
+                            <div class="card-body">
+                              <h5 class="card-title"></h5>
+                                   <!-- <a href="{% url 'profile' username=img.user_profile.username %}" style="font-weight:bolder;font-size:18px;">{{img.user_profile.username}}</a> -->
+
+                              <p class="card-text" style="font-weight:bolder;">
+                                  {% autoescape on %}
                                   <p>CAPTION:  {{img.project_caption}}</p>
-                                {% endautoescape%}</p>
-                        <br>
-                        <a style="font-size:25px;" href="{% url 'project_review' project_id=img.id %}"><i class="fas fa-comment"></i>RATE PROJECT</a>
+                                  {% endautoescape%}</p>
+
+                                  <a href="{% url 'project_review' project_id=img.id %}"><i class="fas fa-comment"></i>RATE PROJECT</a>
+                                  
+                                  <br>
+                                  <hr>
+                            </div>
+    
+                            {% empty %}
+                            <h2>NO IMAGES. FOLLOW OTHERS TO SEE IMAGES.</h2>
+    
+                            
                         
-                        <hr>
+                    </div>
+               
+                   
+                    {% endfor %} 
                 </div>
-                {% endfor %}       
-                          
+                
                        
                        
                        
@@ -144,68 +82,6 @@
 
 
 </body>
-<script>
-    //Initial Ratings
-    const ratings = {
-        design: 8,
-        usability: 6,
-        content: 9
-    }
-    //Total Stars
-    const starsTotal = 10;
 
-    //Run getRatings when DOM loads
-    document.addEventListener('DOMContentLoaded', getRatings);
-   
-    //Form Elements
-    const optionSelect = document.getElementById('option-select');
-    const ratingControl = document.getElementById('rating-control');
-
-    //Init option
-    let option;
-
-    //Option select change
-    optionSelect.addEventListener('change',(e) => {
-        option = e.target.value;
-        // console.log(option)
-        ratingControl.disabled = false;
-        ratingControl.value = ratings[option];
-    });
-
-    //Rating control change
-    ratingControl.addEventListener('blur', (e) => {
-        const rating = e.target.value;
-        //Make sure 10 or under
-        if (rating > 10) {
-            alert('Please rate 1-10');
-            return
-        }
-        //Change Rating
-        ratings[option] = rating;
-        getRatings();
-
-    })
-
-    //Get Ratings
-    function getRatings() {
-        for(let rating in ratings) {
-            //Get Percentage
-            const starPercentage= (ratings[rating] / starsTotal)*100;
-            //console.log(starPercentage)
-            
-            //Round to nearest 10
-            const starPercentageRounded = `${Math.round(starPercentage/ 10) * 10}%`;
-            //console.log(starPercentageRounded)
-            
-            //Set width of stars-inner to percentage
-            document.querySelector(`.${rating} .stars-inner`).style.width = starPercentageRounded;
-            
-            //Add number rating
-            document.querySelector(`.${rating} .number-rating`).innerHTML = ratings[rating];
-        
-        }
-    }
-    
-</script>
 {% endblock%}
 
