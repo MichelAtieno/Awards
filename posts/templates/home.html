@@ -35,7 +35,7 @@
     </style>
 
 </head>
-<body>
+<body style="font-size:23px;">
     <div class="container-fluid">
         <div class="jumbotron">
             
@@ -108,34 +108,32 @@
                 </div>
 
             </div>
-
-            {% for img in images%}
-            <div class="card" style="width: 18rem;border:hidden;" data-toggle="modal" data-target="#{{img.id}}">
-                    <a href="{% url 'profile' username=img.user_profile.username %}" style="font-weight:bolder;">{{img.user_profile.username}}</a>
-                    <img class="card-img-top" src="{{img.photo.url}}" alt="Card image cap" class="img-responsive" style="height:400px;width:400px;border-radius:20px;">
-                    <div class="card-body">
-                      <h5 class="card-title"></h5>
-                           <!-- <a href="{% url 'profile' username=img.user_profile.username %}" style="font-weight:bolder;font-size:18px;">{{img.user_profile.username}}</a> -->
-
-                      <p class="card-text" style="font-weight:bolder;">
-                          {% autoescape on %}
-                            <p>CAPTION:  {{img.project_caption}}</p>
-                          {% endautoescape%}</p>
-
+            <div class="container">
+            <div class="row" style="display: flex; flex-direction: row;">
+                {% for img in images%}
+                <div class="col-md-4">
+                        <a href="{% url 'profile' username=img.user_profile.username %}" style="font-weight:bolder;">{{img.user_profile.username}}</a>
+                        <img src="{{img.photo.url}}" alt="Card image cap" class="img-responsive" style="height:400px;width:400px;border-radius:20px;">
+                        <p style="font-weight:bolder;">
+                                {% autoescape on %}
+                                  <p>CAPTION:  {{img.project_caption}}</p>
+                                {% endautoescape%}</p>
+                        <br>
+                        <a style="font-size:25px;" href="{% url 'project_review' project_id=img.id %}"><i class="fas fa-comment"></i>RATE PROJECT</a>
+                        
+                        <hr>
+                </div>
+                {% endfor %}       
                           
-                          <br>
-                          <a href="{% url 'project_review' project_id=img.id %}"><i class="fa fa-comment-o fa-2x" aria-hidden="true"></i></a>
-                          <hr>
-                    </div>
+                       
+                       
+                       
 
-                    {% empty %}
-                    <h2>NO IMAGES. FOLLOW OTHERS TO SEE IMAGES.</h2>
-
-                    
                 
             </div>
-           
-            {% endfor %}
+            </div>
+
+            
 
             
                 

@@ -17,7 +17,9 @@
     <div class="row">
         <div class="col-md-10">
             <ul class="list-inline">
+                    {% if project.id == review.project.id%}
                 <li class="list-inline-item">
+                   
                     <a href="{% url 'profile' username=review.user.username %}">{{review.user.username}}</a>
                 </li>
                 <li class="list-inline-item">
@@ -26,6 +28,7 @@
                     <p>USABILTY: {{review.usability}} </p>
                     <p>CONTENT: {{review.content}} </p>
                 </li>
+                {% endif %}
             </ul>
         </div>
     </div>

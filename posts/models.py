@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models import Avg
 from tinymce.models import HTMLField
 
 # Create your models here.
@@ -41,7 +42,6 @@ class Project(models.Model):
 
     def delete_project(self):
         self.delete()
-    
 
     @classmethod
     def get_project(cls, id):
@@ -57,6 +57,20 @@ class Project(models.Model):
     def get_profile_image(cls,profile):
         projects = Project.objects.filter(user_profile__pk=profile)
         return projects
+
+    def design_rating(self):
+        all_designs =list( map(lambda x: x.design, self.reviews.all()))
+        return np.mean(all_designs)
+
+    def usability_rating(self):
+        all_usability =list( map(lambda x: x.usability, self.reviews.all()))
+        return np.mean(all_usability)
+
+    def content_rating(self):
+        all_content =list( map(lambda x: x.content, self.reviews.all()))
+        return np.mean(all_content)
+
+    
 
 class Reviews(models.Model):
     RATING = (
@@ -83,5 +97,10 @@ class Reviews(models.Model):
 
     @classmethod
     def get_reviews(cls,id):
-        reviews = Reviews.objects.filter(project__pk = id)
+        reviews = Reviews.objects.filter(project_id = id)
         return reviews
+
+    @classmethod
+    def get_average(cls):
+        usability =Reviews.objects.all().aggregate(Avg('usability'))
+        return usability
