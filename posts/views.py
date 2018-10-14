@@ -1,13 +1,14 @@
 from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect,get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from .forms import RegistrationForm, ProjectForm
-from .models import Profile,Project
+from .forms import RegistrationForm, ProjectForm, ReviewForm
+from .models import Profile,Project,Reviews
 # Create your views here.
 
 def home(request):
     images = Project.get_images()
+
     return render(request, 'home.html', {'images':images})
     
 def register(request):
@@ -47,3 +48,32 @@ def project(request):
         form = ProjectForm()
 
     return render(request, 'profile/uploadproject.html', {'form':form})
+
+@login_required(login_url='/accounts/login')
+def project_review(request, project_id):
+    project = Project.get_project(project_id)
+    
+    reviews = Reviews.get_reviews(project_id)
+   
+    if request.method == 'POST':
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            review = form.save(commit=False)
+            review.project = project
+            review.user = request.user
+            review.save()
+            return redirect('project_review', project_id=project_id)
+    else:
+        form = ReviewForm()
+        print(form)
+        return render(request,'review.html',{'project':project ,'form':form, 'reviews':reviews})
+
+
+
+    
+
+
+    
+   
+            
+

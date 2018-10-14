@@ -1,4 +1,5 @@
 {% extends 'base.html'%}
+{% load bootstrap3%}
 
 {% block content%}
 <head>
@@ -123,6 +124,7 @@
 
                           
                           <br>
+                          <a href="{% url 'project_review' project_id=img.id %}"><i class="fa fa-comment-o fa-2x" aria-hidden="true"></i></a>
                           <hr>
                     </div>
 

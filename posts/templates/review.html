@@ -1,0 +1,51 @@
+{%extends 'base.html'%}
+{% block content %}
+{{ block.super}}
+{% load bootstrap3 %}
+
+  <title>Reviews</title>
+  {{form.media}}
+  <p class="home-text">
+    <a href="{% url 'profile' username=project.user_profile.username %}">{{project.user_profile.username}}</a>
+</p> 
+<img src="{{project.photo.url}}" alt="Image" class="img-responsive" style="height:400px;width:400px;border-radius:20px;">
+<p>{{image.project_caption}} </p>
+
+<hr>
+<div>
+{% for review in reviews %}
+    <div class="row">
+        <div class="col-md-10">
+            <ul class="list-inline">
+                <li class="list-inline-item">
+                    <a href="{% url 'profile' username=review.user.username %}">{{review.user.username}}</a>
+                </li>
+                <li class="list-inline-item">
+                    <p>COMMENT: {{review.comment}}</p>
+                    <p>DESIGN: {{review.design}} </p>
+                    <p>USABILTY: {{review.usability}} </p>
+                    <p>CONTENT: {{review.content}} </p>
+                </li>
+            </ul>
+        </div>
+    </div>
+    {% empty %}
+    <div class="row">
+        <div class="col-md-10">
+            <h3>There are no reviews</h3>
+        </div>
+    </div>
+    {% endfor %}
+
+
+
+<div class="card mx-auto" style="max-width:50rem; margin-top:50px;">
+    <form action="{% url 'project_review' project_id=project.id %}" method="POST">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <input type="submit" class="btn btn-success" value="Rate" style="font-size:21px;">
+    </form>
+</div>
+   
+{% endblock %}
+

@@ -6,7 +6,7 @@ from tinymce.models import HTMLField
 class Profile(models.Model):
     profile_photo = models.ImageField(upload_to ='prof_pictures/')
     bio = HTMLField()
-    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True, default="")
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
 
     def save_profile(self):
         self.save()
@@ -58,3 +58,30 @@ class Project(models.Model):
         projects = Project.objects.filter(user_profile__pk=profile)
         return projects
 
+class Reviews(models.Model):
+    RATING = (
+        (1, '1'),
+        (2, '2'),
+        (3, '3'),
+        (4, '4'),
+        (5, '5'),
+        (6, '6'),
+        (7, '7'),
+        (8, '8'),
+        (9, '9'),
+        (10, '10'),
+    )
+    comment = HTMLField()
+    project = models.ForeignKey(Project)
+    design = models.IntegerField(choices=RATING,default=0)
+    usability = models.IntegerField(choices=RATING,default=0)
+    content = models.IntegerField(choices=RATING,default=0)
+    user = models.ForeignKey(User, on_delete=models.CASCADE,null=True)
+
+    def save_review(self):
+        self.save()
+
+    @classmethod
+    def get_reviews(cls,id):
+        reviews = Reviews.objects.filter(project__pk = id)
+        return reviews
