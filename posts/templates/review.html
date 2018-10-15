@@ -1,7 +1,7 @@
 {%extends 'base.html'%}
 {% block content %}
 {{ block.super}}
-{% load bootstrap3 %}
+{% load bootstrap4 %}
 
 <head>
         <title>Reviews</title>
@@ -9,38 +9,39 @@
 <body style="font-size:23px;">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-2">
+            <div class="col-md-3">
 
             </div>
-            <div class="col-md-8">
+            <div class="col-md-6">
                 <p class="home-text">
                         <a href="{% url 'profile' username=project.user_profile.username %}">{{project.user_profile.username}}</a>
                     </p> 
                     <img src="{{project.photo.url}}" alt="Image" class="img-responsive" style="height:400px;width:400px;border-radius:20px;">
                     <p>{{image.project_caption}} </p>
-                    <button >Number of Votes {{ project.reviews.count| floatformat  }}</button>
-                    <button >design {{ project.design_rating| floatformat  }}</button>
-                    <button >usability {{ project.usability_rating| floatformat  }}</button>
-                    <button >content {{ project.content_rating| floatformat  }}</button>
+                    <button class="btn btn-success">Number of Votes {{ project.reviews.count| floatformat  }}</button>
+                    <button class="btn btn-primary">design {{ project.design_rating| floatformat  }}</button>
+                    <button class="btn btn-info">usability {{ project.usability_rating| floatformat  }}</button>
+                    <button class="btn btn-danger">content {{ project.content_rating| floatformat  }}</button>
 
                     <hr>
                     
                     {% for review in reviews %}
                         
                                 <ul class="list-inline">
-                                        {% if project.id == review.project.id%}{{ project.average_score | floatformat }}
+                                        {% if project.id == review.project.id%} <!--{{ project.average_score | floatformat }} -->
                                     <li class="list-inline-item">
                                         
-                                        <a href="{% url 'profile' username=review.user.username %}">{{review.user.username}}</a>
+                                       <p>Posted By: <a href="{% url 'profile' username=review.user.username %}">{{review.user.username}}</a></p> 
                                     </li>
                                     <li class="list-inline-item">
-                                        <p>{{review.comment}} usability: {{review.usability}}, content: {{review.content}} , design: {{review.design}}</p>
-                                        <p>{{ project.average_score | floatformat }}</p>
-                                        <!-- <p>COMMENT: {{review.comment}}</p>
+                                        <!-- <p>{{review.comment}} usability: {{review.usability}}, content: {{review.content}} , design: {{review.design}}</p>
+                                        <p>{{ project.average_score | floatformat }}</p> -->
+                                        <p>COMMENT: {{review.comment}}</p>
                                         <p>DESIGN: {{review.design}} </p>
                                         <p>USABILTY: {{review.usability}} </p>
-                                        <p>CONTENT: {{review.content}} </p> -->
+                                        <p>CONTENT: {{review.content}} </p>
                                     </li>
+                                    <hr>
                                     {% endif %}
                                 </ul>
                             
@@ -62,7 +63,7 @@
                         </form>
                     
                 </div>
-            <div class="col-md-2">
+            <div class="col-md-3">
                 
             </div>
         </div>
