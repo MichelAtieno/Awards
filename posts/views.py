@@ -4,6 +4,9 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from .forms import RegistrationForm, ProjectForm, ReviewForm, ProfileForm
 from .models import Profile,Project,Reviews
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from .serializer import ProfileSerializer, ProjectSerializer
 # Create your views here.
 
 def home(request):
@@ -100,6 +103,12 @@ def search_profile(request):
     else:
         message = 'Enter term to search'
         return render(request, 'search.html', {'message':message})
+
+class ProfileList(APIView):
+    def get(self, request, format=None):
+        all_profiles = Profile.objects.all()
+        serializers = ProfileSerializer(all_profiles,many=True)
+        return Response(serializers.data)
 
 
 

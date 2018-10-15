@@ -18,10 +18,10 @@
                     </p> 
                     <img src="{{project.photo.url}}" alt="Image" class="img-responsive" style="height:400px;width:400px;border-radius:20px;">
                     <p>{{image.project_caption}} </p>
-                    <button class=" one d-flex justify-content-end" style="float:right; padding:10px; margin:5px">Votes {{ project.reviews.count| floatformat  }}</button>
-              <button class=" two d-flex justify-content-end" style="float:right; padding:10px; margin:5px">design {{ project.design_rating| floatformat  }}</button>
-              <button class=" three d-flex justify-content-end" style="float:right; padding:10px; margin:5px">usability {{ project.usability_rating| floatformat  }}</button>
-              <button class="four d-flex justify-content-end" style="float:right; padding:10px; margin:5px">content {{ project.content_rating| floatformat  }}</button>
+                    <button >Number of Votes {{ project.reviews.count| floatformat  }}</button>
+                    <button >design {{ project.design_rating| floatformat  }}</button>
+                    <button >usability {{ project.usability_rating| floatformat  }}</button>
+                    <button >content {{ project.content_rating| floatformat  }}</button>
 
                     <hr>
                     
