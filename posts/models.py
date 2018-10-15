@@ -89,7 +89,7 @@ class Reviews(models.Model):
         (10, '10'),
     )
     comment = HTMLField()
-    project = models.ForeignKey(Project)
+    project = models.ForeignKey(Project,on_delete=models.CASCADE, related_name='reviews',null=True)
     design = models.IntegerField(choices=RATING,default=0)
     usability = models.IntegerField(choices=RATING,default=0)
     content = models.IntegerField(choices=RATING,default=0)

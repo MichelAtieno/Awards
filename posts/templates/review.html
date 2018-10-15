@@ -18,21 +18,23 @@
                     </p> 
                     <img src="{{project.photo.url}}" alt="Image" class="img-responsive" style="height:400px;width:400px;border-radius:20px;">
                     <p>{{image.project_caption}} </p>
-                    
-                    
-                    
+                    <button class=" one d-flex justify-content-end" style="float:right; padding:10px; margin:5px">Votes {{ project.reviews.count| floatformat  }}</button>
+              <button class=" two d-flex justify-content-end" style="float:right; padding:10px; margin:5px">design {{ project.design_rating| floatformat  }}</button>
+              <button class=" three d-flex justify-content-end" style="float:right; padding:10px; margin:5px">usability {{ project.usability_rating| floatformat  }}</button>
+              <button class="four d-flex justify-content-end" style="float:right; padding:10px; margin:5px">content {{ project.content_rating| floatformat  }}</button>
+
                     <hr>
                     
                     {% for review in reviews %}
                         
                                 <ul class="list-inline">
-                                        {% if project.id == review.project.id%}
+                                        {% if project.id == review.project.id%}{{ project.average_score | floatformat }}
                                     <li class="list-inline-item">
                                         
                                         <a href="{% url 'profile' username=review.user.username %}">{{review.user.username}}</a>
                                     </li>
                                     <li class="list-inline-item">
-                                        <p>{{review.comment}} [usability: {{review.usability}}, content: {{review.content}} , design: {{review.design}}]</p>
+                                        <p>{{review.comment}} {{review.usability}}, content: {{review.content}} , design: {{review.design}}</p>
                                         <p>{{ project.average_score | floatformat }}</p>
                                         <!-- <p>COMMENT: {{review.comment}}</p>
                                         <p>DESIGN: {{review.design}} </p>
