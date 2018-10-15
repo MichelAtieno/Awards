@@ -34,7 +34,7 @@
                                         <a href="{% url 'profile' username=review.user.username %}">{{review.user.username}}</a>
                                     </li>
                                     <li class="list-inline-item">
-                                        <p>{{review.comment}} {{review.usability}}, content: {{review.content}} , design: {{review.design}}</p>
+                                        <p>{{review.comment}} usability: {{review.usability}}, content: {{review.content}} , design: {{review.design}}</p>
                                         <p>{{ project.average_score | floatformat }}</p>
                                         <!-- <p>COMMENT: {{review.comment}}</p>
                                         <p>DESIGN: {{review.design}} </p>
