@@ -6,7 +6,7 @@
 <ul>
     <li>Sign in to the application to start using.</li>
     <li>Upload your project to the application.</li>
-    <li>See my profile with all my projects as well as users who have profiles with projects once searched for.</li>
+    <li>See your profile with all your projects as well as users who have profiles with projects once searched for.</li>
     <li>Rate a project and be identified as the user who rated the project.</li>
 <ul>
 
@@ -18,6 +18,13 @@
     <li>The User can update their profiles using the link on their profile page, "Edit Profile".</li>
     <li>The User can search for existing profiles using the search bar on the navbar, "Search".</li>
      <li>The User can rate a project by clicking the comment icon and they will be redirected to a page where they can rate a project</li>
+     <li> There is a RESTAPI so that users can access data from the application. There are two API endpoints:
+     <ul>
+        <li>Profile - This endpoint returns all the user profiles with information such as the username, bio, projects of the user and profile picture</li>
+        <li>Projects- This endpoint returns information pertaining to all the projects posted in the application. </li>
+     </ul>
+        
+        
 </ol>
 
 # You can view project on https://interior23.herokuapp.com/
