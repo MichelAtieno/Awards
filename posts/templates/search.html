@@ -1,31 +1,38 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
 <div class="container" style="font-size:23px; font-weight: bolder;">
     <div class="row">
         <div class="col-md-12 text-center">
+            {% if projects%}
             <h2 class="font2">Search results for {{message}}</h2>
+            {% else %}
+            <h2>Found O results: {{message}}</h2>
+            {% endif %}
         </div>
     </div>
     <div class="row">
         <div class="col-md-3">
-        {% if profiles %}
-            {% for profile in profiles %}
+        {% if projects %}
+            {% for project in projects %}
             <div class="card" style="width: 18rem;border:hidden;">
-                <a href="{% url 'profile' username=profile.user.username %}" class="btn btn-primary" style="font-size:21px;">View Profile</a>
-                {% if profile.profile_photo %}
-                <p>USERNAME: {{profile.user.username}}</p>
-                <img class="card-img-top" src="{{profile.profile_photo.url}}" alt="Card image cap" class="img-responsive"  style="height:400px;width:400px;border-radius:20px;">
-                <div class="card-body">
-                <h5 class="card-title" style="font-weight:bolder;font-size:18px;">BIO: {{profile.bio}} </h5>
-                {% endif %}
+                <div class="container" style="height:350px;width:100%;padding:0px;">
+                <button class="btn btn-info"><a href="{% url 'project_review' project.id %}" style="color:black;">View Project </a></button>
+                <br>
+                <br>
+                <img class="card-img-top" src="{{project.photo.url}}" alt="Card image cap" class="img-responsive" style="height:400px;width:400px;border-radius:20px;">
+                
+                
+          
+              </div>
             </div>
-            </div>
-            {% endfor %}
-        {% else %}
+        
+        {% empty%}
         <div class="col-md-12 text-center">
                 <h4 class="font1">No results for {{message}} </h4>
         </div>
+        {% endfor %}
         {% endif %}
     </div>
 </div>

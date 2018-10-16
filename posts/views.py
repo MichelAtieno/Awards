@@ -96,13 +96,13 @@ def edit_profile(request):
 
     return render(request, 'profile/editprofile.html', {'form':form, 'profile':profile})
 
-def search_profile(request):
-    if 'search' in request.GET and request.GET['search']:
-        search_term = request.GET.get('search')
-        found_profiles = Profile.search_profile(search_term)
+def search_project(request):
+    if 'project' in request.GET and request.GET["project"]:
+        search_term = request.GET.get("project")
+        found_project = Project.search_project(search_term)
         message = f'{search_term}'
 
-        return render(request, 'search.html',{'message':message, 'profiles':found_profiles})
+        return render(request, 'search.html',{'message':message, 'projects':found_project})
     else:
         message = 'Enter term to search'
         return render(request, 'search.html', {'message':message})

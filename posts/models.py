@@ -27,10 +27,10 @@ class Profile(models.Model):
         profile = Profile.objects.filter(user=id).first()
         return profile
 
-    @classmethod
-    def search_profile(cls,name):
-        profile = Profile.objects.filter(user__username__icontains = name)
-        return profile
+    # @classmethod
+    # def search_profile(cls,name):
+    #     profile = Profile.objects.filter(user__username__icontains = name)
+    #     return profile
 
 
 
@@ -38,13 +38,18 @@ class Project(models.Model):
     photo = models.ImageField(upload_to ='prof_pictures/')
     project_name = models.CharField(max_length = 100)
     project_caption =  models.CharField(max_length = 100)
-    user_profile = models.ForeignKey(User, on_delete=models.CASCADE, default="")
+    user_profile = models.ForeignKey(User, on_delete=models.CASCADE, related_name='projects', default="")
 
     def save_project(self):
         self.save()
 
     def delete_project(self):
         self.delete()
+
+    @classmethod
+    def search_project(cls,search_term):
+        projects = cls.objects.filter(project_name__icontains=search_term)
+        return projects
 
     @classmethod
     def get_project(cls, id):
