@@ -22,6 +22,8 @@ class ProjectTestCase(TestCase):
         project = Project.get_project(1)
         self.assertTrue(project==self.new_project)
 
+
+
 class ProfileTest(TestCase):
     def setUp(self):
         self.user = User.objects.create(id =1,username='a')
@@ -35,11 +37,7 @@ class ProfileTest(TestCase):
         profile = Profile.get_profile(1)
         self.assertTrue(profile== self.new_profile)
 
-    def test_search_profile(self):
-        self.new_profile.save()
-        profile = Profile.search_profile('a')
-        self.assertTrue(len(profile)==1)
-
+    
     def test_filter_by_id(self):
         self.new_profile.save()
         profile = Profile.filter_by_id(1)
