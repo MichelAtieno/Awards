@@ -43,23 +43,29 @@
                               <h5 class="card-title"></h5>
                                    <!-- <a href="{% url 'profile' username=img.user_profile.username %}" style="font-weight:bolder;font-size:18px;">{{img.user_profile.username}}</a> -->
 
-                              <p class="card-text" style="font-weight:bolder;">
-                                  {% autoescape on %}
-                                  <p>CAPTION:  {{img.project_caption}}</p>
-                                  {% endautoescape%}</p>
+                              
+                   </div>
+                   </div>
+                        <div style="font-weight:bold;font-style: italic;">
+                        <p><span style="color:rgb(38, 38, 90);">Project Name:</span> {{img.project_name}}</p>
+                        
+                        {% autoescape on %}
+                        <p><span style="color:rgb(38, 38, 90);">Caption: </span>  {{img.project_caption}}</p>
+                        {% endautoescape%}
+                        
 
-                                  <a href="{% url 'project_review' project_id=img.id %}"><i class="fas fa-comment"></i>RATE PROJECT</a>
-                                  
-                                  <br>
-                                  <hr>
-                            </div>
+                        <a href="{% url 'project_review' project_id=img.id %}"><i class="fas fa-comment"></i>RATE PROJECT</a>
+                        </div>
+                        <br>
+                        <hr>
+                   
     
                             {% empty %}
                             <h2>NO IMAGES. FOLLOW OTHERS TO SEE IMAGES.</h2>
     
                             
                         
-                    </div>
+                   
                     {% endfor %} 
                 </div>
                 <div class="col-md-2"></div>
